@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import data from '../data'
+import data, { withBase } from '../data'
 import '../styles/map.css'
 
 /* ============================================================
@@ -15,10 +15,10 @@ const ROUTE_COLORS = {
 
 // 對應 public/images/ 底下的正方形地圖圖檔
 const MAP_IMAGES = {
-  'tmb': '/images/MAP_TMB.jpg',
-  'inca-trail': '/images/MAP_inca_trail.jpg',
-  'milford-track': '/images/MAP_milford_track.jpg',
-  'kumano-kodo': '/images/MAP_kumano_kodo.jpg',
+  'tmb': withBase('/images/MAP_TMB.jpg'),
+  'inca-trail': withBase('/images/MAP_inca_trail.jpg'),
+  'milford-track': withBase('/images/MAP_milford_track.jpg'),
+  'kumano-kodo': withBase('/images/MAP_kumano_kodo.jpg'),
 }
 
 export default function MapGuide() {
