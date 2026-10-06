@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
 import Home from './pages/Home'
 import MapGuide from './pages/MapGuide'
-import Gear from './pages/gear'
+import Gear from './pages/Gear'
 import Safety from './pages/Safety'
 import TourDetail from './pages/TourDetail'
 
