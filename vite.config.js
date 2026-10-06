@@ -20,5 +20,5 @@ function spa404Fallback() {
 
 export default defineConfig({
   plugins: [react(), spa404Fallback()],
-  base: process.env.NETLIFY ? '/' : '/travel_FA/',
+  base: process.env.NETLIFY ? '/' : '/FE6_HW_MTFA/',
 })
