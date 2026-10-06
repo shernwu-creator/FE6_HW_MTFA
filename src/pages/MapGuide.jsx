@@ -36,8 +36,7 @@ export default function MapGuide() {
 
     // 捲動到地圖區域（搭配 CSS 的 scroll-margin-top 避免被 navbar 遮住）
     requestAnimationFrame(() => {
-      document
-        .querySelector('.map-layout')
+      document.querySelector('.map-layout')
         ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     })
   }
@@ -73,7 +72,7 @@ export default function MapGuide() {
         <section className="static-map-section">
           <img 
             src={MAP_IMAGES[activeRoute.id]} 
-            alt={`${activeRoute.name} 地形圖`} 
+            alt={`${activeRoute.name} 地圖`} 
             className="static-map-image"
           />
         </section>

@@ -1,6 +1,6 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
 import data from '../data'
-import '../styles/tour-detail.css'
+import '../styles/tourdetail.css'
 
 export default function TourDetail() {
   const { slug } = useParams()
@@ -53,11 +53,11 @@ export default function TourDetail() {
         <section className="itinerary">
           <h2>每日行程</h2>
           {route.itinerary.map(day => (
-            <details key={day.day} className="accordion-item" open>
-              <summary>
+            <article key={day.day} className="accordion-item">
+              <div className="accordion-item-tital">
                 <strong>Day {day.day}：</strong> {day.title}
                 <span className="day-distance">（{day.distance}）</span>
-              </summary>
+              </div>
               <div className="details-content">
                 {/* 每天的行程照片 */}
                 {day.image && (
@@ -65,10 +65,12 @@ export default function TourDetail() {
                     <img src={day.image} alt={`Day ${day.day} - ${day.title}`} className="day-image" loading="lazy" />
                   </div>
                 )}
-                <p><strong>爬升/下降：</strong> {day.elevationGain}</p>
-                <p>{day.description}</p>
+                <div className="detail-info">
+                    <p><strong>爬升/下降：</strong> {day.elevationGain}</p>
+                    <p>{day.description}</p>
+                </div>
               </div>
-            </details>
+            </article>
           ))}
         </section>
 

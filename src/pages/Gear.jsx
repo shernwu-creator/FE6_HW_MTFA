@@ -1,7 +1,7 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import '../styles/gear.css'
 
-// 預設裝備清單資料（含預估單項重量，單位：克）
+// 預設裝備清單資料
 const INITIAL_GEAR_DATA = [
   // 衣物與睡眠
   { id: 'gear-1', name: '防水防風外套 (Gore-Tex Shell)', weightGrams: 420, category: '衣物睡眠', required: true },
@@ -28,32 +28,12 @@ const INITIAL_GEAR_DATA = [
   { id: 'gear-16', name: '輕量鋁合金登山杖 (一對)', weightGrams: 450, category: '安全急救', required: false },
 ];
 
-const LOCAL_STORAGE_KEY = 'peak_explore_gear_checklist';
-
 export default function Gear() {
-  // 1. 初始化 State：從 localStorage 讀取紀錄，若無則為空物件
-  const [checkedItems, setCheckedItems] = useState(() => {
-    try {
-      const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
-      return saved ? JSON.parse(saved) : {};
-    } catch (error) {
-      console.error('無法讀取 localStorage 紀錄:', error);
-      return {};
-    }
-  });
-
+  // 1. 簡化 State：直接初始化為空物件，每次載入皆從零開始
+  const [checkedItems, setCheckedItems] = useState({});
   const [activeCategory, setActiveCategory] = useState('All');
 
-  // 2. 當 checkedItems 變更時，自動更新至 localStorage
-  useEffect(() => {
-    try {
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(checkedItems));
-    } catch (error) {
-      console.error('無法寫入 localStorage:', error);
-    }
-  }, [checkedItems]);
-
-  // 3. 計算勾選裝備的「總重量」與「缺漏必備品數量」
+  // 2. 計算總重量與缺漏必備品數量
   const { totalWeightGrams, checkedCount, missingRequiredCount } = useMemo(() => {
     let weight = 0;
     let count = 0;
@@ -76,7 +56,7 @@ export default function Gear() {
     };
   }, [checkedItems]);
 
-  // 4. 事件處理：單項勾選/取消
+  // 3. 事件處理：單項勾選/取消
   const handleToggleItem = (id) => {
     setCheckedItems((prev) => ({
       ...prev,
@@ -97,11 +77,9 @@ export default function Gear() {
     });
   };
 
-  // 重置所有選取
+  // 簡易重置：直接將 State 清空
   const handleReset = () => {
-    if (window.confirm('確定要清空所有已勾選的裝備紀錄嗎？')) {
-      setCheckedItems({});
-    }
+    setCheckedItems({});
   };
 
   // 依 Tab 篩選當前顯示的裝備
@@ -111,19 +89,16 @@ export default function Gear() {
     return INITIAL_GEAR_DATA.filter((item) => item.category === activeCategory);
   }, [activeCategory]);
 
-  // 重量單位顯示 (超過 1000 克時轉為 kg)
+  // 重量單位轉換
   const formatWeight = (grams) => {
-    if (grams >= 1000) {
-      return `${(grams / 1000).toFixed(2)} kg`;
-    }
-    return `${grams} g`;
+    return grams >= 1000 ? `${(grams / 1000).toFixed(2)} kg` : `${grams} g`;
   };
 
   return (
     <div className="guide-container">
       <header className="guide-header">
         <h1>戶外裝備清單與背負重量計算器</h1>
-        <p>勾選攜帶的裝備，即時計算裝備總重量並將進度儲存於瀏覽器中。</p>
+        <p>勾選攜帶的裝備，即時評估行囊重量與必備品狀態。</p>
       </header>
 
       {/* 數據即時統計看板 */}
@@ -161,16 +136,10 @@ export default function Gear() {
         </div>
 
         <div className="action-group">
-          <button
-            className="action-btn"
-            onClick={() => handleSelectCategoryAll(activeCategory, true)}
-          >
+          <button className="action-btn" onClick={() => handleSelectCategoryAll(activeCategory, true)}>
             本區全選
           </button>
-          <button
-            className="action-btn"
-            onClick={() => handleSelectCategoryAll(activeCategory, false)}
-          >
+          <button className="action-btn" onClick={() => handleSelectCategoryAll(activeCategory, false)}>
             本區取消
           </button>
           <button className="reset-btn-outline" onClick={handleReset}>
@@ -194,7 +163,7 @@ export default function Gear() {
                   type="checkbox"
                   id={item.id}
                   checked={isChecked}
-                  onChange={() => {}} // 點擊由外層 div 統一處理
+                  onChange={() => {}} // 由外層 div 統一處理點擊
                 />
               </div>
 
