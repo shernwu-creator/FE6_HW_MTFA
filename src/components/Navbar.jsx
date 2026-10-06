@@ -40,11 +40,7 @@ export default function Navbar() {
             <ul className={`navbar-links ${isOpen ? 'open' : ''}`}>
                 {links.map(link => (
                     <li key={link.to}>
-                        <NavLink
-                        to={link.to}
-                        onClick={closeMenu}
-                        // className={({ isActive }) => isActive ? 'active' : ''}
-                        >
+                        <NavLink to={link.to} onClick={closeMenu}>
                             {link.text}
                         </NavLink>
                     </li>
