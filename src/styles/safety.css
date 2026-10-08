@@ -3,7 +3,8 @@
    ============================================================ */
 
 .safety-container {
-  max-width: 1100px;
+  /* max-width: 1100px; */
+  max-width: 100vw;
   margin: 0 auto;
   padding: 3rem 1.5rem;
   color: var(--text-primary);
@@ -82,6 +83,7 @@
   border-left: 6px solid #c62828;
   border-radius: 12px;
   padding: 2rem;
+  margin-bottom: 3rem;
 }
 
 .emergency-section h2 {
@@ -111,20 +113,20 @@
 }
 
 .em-item:hover {
-  border-color: #c62828;
+  border-color: #c00b0b;
   transform: translateY(-3px);
 }
 
 .em-label {
   font-size: 0.85rem;
-  color: var(--text-muted);
+  color: #e7e89f;
   letter-spacing: 1px;
 }
 
 .em-number {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #ff6b6b;
+  color: #ef5656;
   font-family: 'Oswald', 'Noto Sans HK', sans-serif;
   letter-spacing: 2px;
 }
@@ -143,5 +145,115 @@
   }
   .em-number {
     font-size: 1.3rem;
+  }
+}
+
+/* =========================================================
+   星空背景外層容器與文字包裝盒設定
+========================================================= */
+.safety-container.starry-sky-bg {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  /* 深色星空漸層底色 */
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  overflow: hidden; /* 非常重要：切掉超出畫面的星星，避免出現多餘的捲軸 */
+  padding: 3rem 1.5rem; /* 保留你原本的內邊距 */
+  perspective: 1000px;
+}
+
+/* 確保你的內容卡片與文字永遠浮在星星上面 */
+.safety-content-wrapper {
+  position: relative;
+  z-index: 10; 
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 如果你的標題原本是黑色的，可以在這把它改成白色 */
+.safety-header h1, 
+.safety-header p {
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+/* =========================================================
+   純 CSS 星空動畫 (Box-Shadow 產生星點)
+========================================================= */
+.stars-small,
+.stars-medium,
+.stars-large {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  z-index: 1; /* 星星圖層墊底 */
+}
+
+.stars-small::after,
+.stars-medium::after,
+.stars-large::after {
+  content: "";
+  position: absolute;
+  top: 100vh; /* 無縫接軌的第二塊星空 */
+  left: 0;
+  background: transparent;
+}
+
+/* ---------- 小星星 ---------- */
+.stars-small,
+.stars-small::after {
+  width: 1px;
+  height: 1px;
+  box-shadow: 
+    10vw 20vh #fff, 40vw 80vh #fff, 80vw 10vh #fff, 90vw 90vh #fff,
+    20vw 50vh #fff, 50vw 30vh #fff, 70vw 70vh #fff, 15vw 85vh #fff,
+    5vw 40vh #fff, 60vw 15vh #fff, 30vw 95vh #fff, 85vw 45vh #fff,
+    45vw 60vh #fff, 75vw 25vh #fff, 25vw 5vh #fff, 95vw 65vh #fff;
+}
+.stars-small {
+  animation: moveUp 100s linear infinite, twinkle 4s ease-in-out infinite alternate;
+}
+
+/* ---------- 中星星 ---------- */
+.stars-medium,
+.stars-medium::after {
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  box-shadow: 
+    15vw 15vh #fff, 50vw 60vh #fff, 85vw 85vh #fff, 10vw 90vh #fff,
+    30vw 30vh #fff, 70vw 40vh #fff, 40vw 10vh #fff, 90vw 30vh #fff,
+    20vw 75vh #fff, 60vw 80vh #fff, 5vw 5vh #fff, 95vw 95vh #fff;
+}
+.stars-medium {
+  animation: moveUp 75s linear infinite, twinkle 3s ease-in-out infinite alternate;
+}
+
+/* ---------- 大星星 ---------- */
+.stars-large,
+.stars-large::after {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  box-shadow: 
+    25vw 25vh #fff, 75vw 75vh #fff, 10vw 50vh #fff, 80vw 20vh #fff,
+    50vw 90vh #fff, 40vw 40vh #fff, 90vw 60vh #fff, 20vw 10vh #fff;
+}
+.stars-large {
+  animation: moveUp 50s linear infinite, twinkle 5s ease-in-out infinite alternate;
+}
+
+/* ---------- 動畫 Keyframes ---------- */
+@keyframes moveUp {
+  0% { transform: translateY(-20vh); transform: translateZ(-2); }
+  100% { transform: translateY(100vh); transform: translateZ(300); }
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.3; }
+  100% { 
+    opacity: 1; 
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
   }
 }
