@@ -1,10 +1,10 @@
-# 🏔️ PeakExplore - 全球頂級健行路線導覽
+# 🏔️ Mountain Travel - 全球頂級健行路線導覽
 
 [![React](https://img.shields.io/badge/React-18.x-blue.svg)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-5.x-646CFF.svg)](https://vitejs.dev/)
 [![React Router](https://img.shields.io/badge/React_Router-6.x-CA4245.svg)](https://reactrouter.com/)
 
-**PeakExplore** 是一個專為戶外愛好者打造的 React 單頁應用程式 (SPA)。收錄了世界四大經典徒步路線（環白朗峰、印加古道、米爾福德步道、熊野古道），並提供互動式的裝備重量計算器與登山安全指南。
+**Mountain Travel** 是一個專為戶外愛好者打造的 React 單頁應用程式 (SPA)。收錄了世界四大經典徒步路線（環白朗峰、印加古道、米爾福德步道、熊野古道），並提供互動式的裝備重量計算器與登山安全指南。
 
 🔗 **Live Demo:** [https://shernwu-creator.github.io/FE6_HW_MTFA/](https://shernwu-creator.github.io/FE6_HW_MTFA/)
 

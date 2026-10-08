@@ -141,3 +141,77 @@ h1, h2, .display-font {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-parchment-600);
 }
+
+/* =========================================================
+   全局環境圖層 (蓋在全螢幕上)
+========================================================= */
+.global-ambient-layer {
+  position: fixed;      /* 死死釘在瀏覽器視窗上，不隨捲軸滾動 */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;        /* 設定超高圖層，蓋在所有東西上面 */
+  pointer-events: none; /* 🌟【極度重要】讓滑鼠點擊「穿透」這個圖層，才不會癱瘓網站按鈕 */
+  overflow: hidden;     /* 避免雲朵飄出螢幕時產生討厭的水平捲軸 */
+}
+
+/* =========================================================
+   雲霧/山影 的共用設定
+========================================================= */
+.cloud {
+  position: absolute;
+  /* 這裡可以用純 CSS 畫，或者換成你自己的雲朵/山脈去背 PNG 圖片 */
+  background-image: radial-gradient(closest-side, rgba(255, 255, 255, 0.15), transparent);
+  border-radius: 50%;
+  filter: blur(1px); /* 讓邊緣模糊，產生「雲霧」感 */
+}
+
+/* 第一朵雲：大且緩慢，在畫面上方 */
+.cloud-1 {
+  width: 60vw;
+  height: 40vh;
+  top: -10vh;
+  left: -20vw;
+  animation: drift 20s linear infinite alternate, fadeInOut 15s ease-in-out infinite alternate;
+}
+
+/* 第二朵雲：中等，在畫面中間偏下 */
+.cloud-2 {
+  width: 50vw;
+  height: 30vh;
+  bottom: 10vh;
+  right: -20vw;
+  animation: driftReverse 15s linear infinite alternate, fadeInOut 20s ease-in-out infinite alternate-reverse;
+}
+
+/* 第三朵雲：細長霧氣，在畫面最下方 */
+.cloud-3 {
+  width: 120vw;
+  height: 25vh;
+  bottom: -5vh;
+  left: -10vw;
+  background-image: radial-gradient(closest-side, rgba(255, 255, 255, 0.08), transparent);
+  animation: drift 30s linear infinite alternate;
+}
+
+/* =========================================================
+   @keyframes 動畫腳本
+========================================================= */
+/* 左右緩慢飄移 */
+@keyframes drift {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(50vw); }
+}
+
+/* 反向左右飄移 */
+@keyframes driftReverse {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50vw); }
+}
+
+/* 若隱若現的呼吸感 */
+@keyframes fadeInOut {
+  0% { opacity: 0.2; }
+  100% { opacity: 0.8; }
+}

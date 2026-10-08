@@ -8,6 +8,7 @@
   margin: 0 auto;
   padding: 3rem 1.5rem;
   color: var(--text-primary);
+  margin-bottom: 2rem;
 }
 
 .catalog-header {

@@ -3,6 +3,7 @@
   flex-direction: column;
   gap: 0rem;
   overflow: hidden;
+  margin-bottom: 3rem;
 }
 /* Hero X 容器 */
 .hero-x-container {

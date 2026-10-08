@@ -1,9 +1,33 @@
 /* ===== 頁尾主容器 ===== */
 .site-footer {
-  background-color: var(--color-parchment-800);
+  /* background-color: var(--color-parchment-800); */
+  /* background: linear-gradient(to bottom,#1b1a12d6, #13120aeb, #19180bec, rgba(34, 33, 22, 0.253)), url(../../public/images/Firefly_Wide_01.png) center/cover no-repeat; */
+  /* background: radial-gradient(circle, #423f19, #423f19cb, rgba(119, 112, 12, 0.091)), url(/images/Firefly_Wide_01.png) center/cover no-repeat; */
   color: var(--color-parchment-50);
   padding: 3rem 1.5rem 1rem;
   /* margin-top: 4rem; */
+  position: relative;
+  overflow: hidden;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+     background: linear-gradient(to bottom,var(--color-parchment-900), #13120aeb, #19180bec, rgba(34, 33, 22, 0.253)), url(../../public/images/Firefly_Wide_01.png) center/cover no-repeat;
+    z-index: -1;
+    animation: kenBurns 25s ease-in-out infinite alternate;
+  }
+}
+@keyframes kenBurns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    /* 慢慢放大並向左上角緩慢平移 */
+    transform: scale(1.2) translate(-2%, 4%);
+  }
 }
 
 /* ===== 四欄網格 ===== */
@@ -113,7 +137,8 @@
   border-top: 1px solid var(--color-parchment-200);
   padding-top: 1rem;
   font-size: 0.85rem;
-  color: #888;
+  /* color: #888; */
+  color: var(--color-parchment-200);
 }
 
 /* ===== RWD ===== */
