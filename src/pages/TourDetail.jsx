@@ -1,23 +1,28 @@
-import { useParams, Link, Navigate } from 'react-router-dom'
-import data from '../data'
-import '../styles/tourdetail.css'
+import { useParams, Link, Navigate } from "react-router-dom";
+import data from "../data";
+import "../styles/tourdetail.css";
 
 export default function TourDetail() {
-  const { slug } = useParams()
-  const route = data.routes.find(item => item.slug === slug)
+  const { slug } = useParams();
+  const route = data.routes.find((item) => item.slug === slug);
 
   if (!route) {
-    return <Navigate to="/" replace />
+    return <Navigate to="/" replace />;
   }
 
   return (
     <div className="tour-detail">
       {/* Banner 保持不變 */}
-      <div className="banner" style={{ backgroundImage: `url(${route.heroImage})` }}>
+      <div
+        className="banner"
+        style={{ backgroundImage: `url(${route.heroImage})` }}
+      >
         <div className="banner-overlay">
           <span className="banner-country">{route.country}</span>
           <h1>{route.name}</h1>
-          <p className="banner-sub">{route.englishName} · {route.durationDays}</p>
+          <p className="banner-sub">
+            {route.englishName} · {route.durationDays}
+          </p>
         </div>
       </div>
 
@@ -26,14 +31,30 @@ export default function TourDetail() {
         <section className="overview">
           <h2>路線概覽</h2>
           <div className="overview-grid">
-            <div className="overview-item"><span className="ov-label">總長度</span><span className="ov-value">{route.distanceKm} km</span></div>
-            <div className="overview-item"><span className="ov-label">預估天數</span><span className="ov-value">{route.durationDays}</span></div>
-            <div className="overview-item"><span className="ov-label">最高海拔</span><span className="ov-value">{route.maxElevationM} m</span></div>
-            <div className="overview-item"><span className="ov-label">難易度</span><span className="ov-value">{route.difficulty}</span></div>
+            <div className="overview-item">
+              <span className="ov-label">總長度</span>
+              <span className="ov-value">{route.distanceKm} km</span>
+            </div>
+            <div className="overview-item">
+              <span className="ov-label">預估天數</span>
+              <span className="ov-value">{route.durationDays}</span>
+            </div>
+            <div className="overview-item">
+              <span className="ov-label">最高海拔</span>
+              <span className="ov-value">{route.maxElevationM} m</span>
+            </div>
+            <div className="overview-item">
+              <span className="ov-label">難易度</span>
+              <span className="ov-value">{route.difficulty}</span>
+            </div>
           </div>
           <p className="overview-summary">{route.summary}</p>
           <div className="tag-list">
-            {route.tags.map(tag => <span key={tag} className="tag">#{tag}</span>)}
+            {route.tags.map((tag) => (
+              <span key={tag} className="tag">
+                #{tag}
+              </span>
+            ))}
           </div>
         </section>
 
@@ -44,7 +65,9 @@ export default function TourDetail() {
             <div className="gallery-grid">
               {[route.heroImage, route.heroImage2, route.heroImage3]
                 .filter(Boolean)
-                .map((img, i) => <img key={i} src={img} alt={`${route.name} view ${i + 1}`} />)}
+                .map((img, i) => (
+                  <img key={i} src={img} alt={`${route.name} view ${i + 1}`} />
+                ))}
             </div>
           </section>
         )}
@@ -52,7 +75,7 @@ export default function TourDetail() {
         {/* 每日行程：加入照片 */}
         <section className="itinerary">
           <h2>每日行程</h2>
-          {route.itinerary.map(day => (
+          {route.itinerary.map((day) => (
             <article key={day.day} className="accordion-item">
               <div className="accordion-item-tital">
                 <strong>Day {day.day}：</strong> {day.title}
@@ -62,12 +85,19 @@ export default function TourDetail() {
                 {/* 每天的行程照片 */}
                 {day.image && (
                   <div className="day-image-wrapper">
-                    <img src={day.image} alt={`Day ${day.day} - ${day.title}`} className="day-image" loading="lazy" />
+                    <img
+                      src={day.image}
+                      alt={`Day ${day.day} - ${day.title}`}
+                      className="day-image"
+                      loading="lazy"
+                    />
                   </div>
                 )}
                 <div className="detail-info">
-                    <p><strong>爬升/下降：</strong> {day.elevationGain}</p>
-                    <p>{day.description}</p>
+                  <p>
+                    <strong>爬升/下降：</strong> {day.elevationGain}
+                  </p>
+                  <p>{day.description}</p>
                 </div>
               </div>
             </article>
@@ -75,10 +105,14 @@ export default function TourDetail() {
         </section>
 
         <div className="detail-actions">
-          <Link to="/map" className="back-btn">← 返回地圖導覽</Link>
-          <Link to="/gear" className="gear-link-btn">查看裝備清單 →</Link>
+          <Link to="/map" className="back-btn">
+            ← 返回地圖導覽
+          </Link>
+          <Link to="/gear" className="gear-link-btn">
+            查看裝備清單 →
+          </Link>
         </div>
       </div>
     </div>
-  )
+  );
 }

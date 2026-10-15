@@ -1,13 +1,12 @@
-import data from '../data'
-import '../styles/safety.css'
+import data from "../data";
+import "../styles/safety.css";
 
 export default function Safety() {
-  const topics = data.safetyTopics
+  const topics = data.safetyTopics;
 
   return (
     /* 1. 外層容器：加上 starry-sky-bg 類別來設定深色漸層背景 */
     <div className="safety-container starry-sky-bg">
-      
       {/* 2. 星空的 3 個獨立圖層 (放這裡才不會擋住內容) */}
       <div className="stars-small"></div>
       <div className="stars-medium"></div>
@@ -21,10 +20,10 @@ export default function Safety() {
         </header>
 
         <section className="safety-grid">
-          {topics.map(topic => (
+          {topics.map((topic) => (
             <article key={topic.id} className="safety-card">
               <div className="safety-icon">
-                {topic.id.toString().padStart(2, '0')}
+                {topic.id.toString().padStart(2, "0")}
               </div>
               <h2>{topic.title}</h2>
               <p>{topic.content}</p>
@@ -32,28 +31,27 @@ export default function Safety() {
           ))}
         </section>
         <section className="emergency-section">
-        <h2>緊急聯絡</h2>
-        <div className="emergency-grid">
-          <div className="em-item">
-            <span className="em-label">緊急救援</span>
-            <span className="em-number">112</span>
+          <h2>緊急聯絡</h2>
+          <div className="emergency-grid">
+            <div className="em-item">
+              <span className="em-label">緊急救援</span>
+              <span className="em-number">112</span>
+            </div>
+            <div className="em-item">
+              <span className="em-label">消防</span>
+              <span className="em-number">999</span>
+            </div>
+            <div className="em-item">
+              <span className="em-label">警察</span>
+              <span className="em-number">999</span>
+            </div>
+            <div className="em-item">
+              <span className="em-label">國家搜救</span>
+              <span className="em-number">HKSOS(App)或致電 999</span>
+            </div>
           </div>
-          <div className="em-item">
-            <span className="em-label">消防</span>
-            <span className="em-number">999</span>
-          </div>
-          <div className="em-item">
-            <span className="em-label">警察</span>
-            <span className="em-number">999</span>
-          </div>
-          <div className="em-item">
-            <span className="em-label">國家搜救</span>
-            <span className="em-number">HKSOS(App)或致電 999</span>
-          </div>
-        </div>
-      </section>
+        </section>
       </div>
     </div>
-    
-  )
+  );
 }
